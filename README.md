@@ -7,3 +7,6 @@ Train a small U-Net on Penn-Fudan pedestrian masks with deterministic train/vali
 Use Python 3.10+ in a virtual environment; install `pip install -r requirements.txt`, then run `python main.py --help` (or see project-specific command below). Dataset files, model weights and outputs are kept locally and ignored by Git.
 
 Training code uses a fixed random seed/split and writes held-out metrics and model artifacts to `outputs/`.
+## Dataset source
+
+Downloads the Penn-Fudan pedestrian image and mask dataset from the [University of Pennsylvania project page](https://www.cis.upenn.edu/~jshi/ped_html/).
