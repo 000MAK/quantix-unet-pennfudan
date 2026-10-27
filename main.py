@@ -32,7 +32,7 @@ def main():
    for n in f.namelist():
     if '..' in Path(n).parts or n.startswith('/'): raise ValueError('Unsafe archive path')
    f.extractall(data)
- ds=Pets(data); n=len(ds); tr,va,te=random_split(ds,[int(n*.7),int(n*.15),n-int(n*.85)],generator=torch.Generator().manual_seed(42)); device='cuda' if torch.cuda.is_available() else 'cpu'; model=UNet().to(device); opt=torch.optim.Adam(model.parameters(),lr=1e-3); lossfn=nn.BCEWithLogitsLoss()
+ ds=Pets(data); n=len(ds); train_size=int(n*.7); val_size=int(n*.15); test_size=n-train_size-val_size; tr,va,te=random_split(ds,[train_size,val_size,test_size],generator=torch.Generator().manual_seed(42)); device='cuda' if torch.cuda.is_available() else 'cpu'; model=UNet().to(device); opt=torch.optim.Adam(model.parameters(),lr=1e-3); lossfn=nn.BCEWithLogitsLoss()
  def run(part,training=False):
   model.train(training); ls=[]; inter=union=0
   for x,y in DataLoader(part,batch_size=4,shuffle=training):
